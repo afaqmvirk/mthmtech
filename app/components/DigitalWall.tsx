@@ -13,6 +13,7 @@ export function DigitalWall() {
   const desktopCanvasRef = useRef<HTMLCanvasElement>(null);
   const mobileCanvasRef = useRef<HTMLCanvasElement>(null);
   const [isInteractable, setIsInteractable] = useState(false);
+  const [dimensionsKey, setDimensionsKey] = useState(0);
   
   const desktopGrid = useRef<GridCell[]>([]);
   const mobileGrid = useRef<GridCell[]>([]);
@@ -57,6 +58,7 @@ export function DigitalWall() {
         mobileDim.current = { width: w, height: h, cols, rows, charW, charH };
         mobileGrid.current = initGrid(cols, rows);
     }
+    setDimensionsKey(prev => prev + 1);
   }, []);
 
   useEffect(() => {
@@ -154,7 +156,7 @@ export function DigitalWall() {
 
     render();
     return () => cancelAnimationFrame(rafId);
-  }, [isInteractable]);
+  }, [isInteractable, dimensionsKey]);
 
   const handleMouseMove = (e: React.MouseEvent) => {
     if (!isInteractable) return;
@@ -205,10 +207,10 @@ export function DigitalWall() {
 
   return (
     <>
-      <div className="hidden lg:block absolute left-[600px] right-0 top-0 bottom-0 overflow-hidden z-20 pointer-events-none" style={{ maskImage: 'linear-gradient(to right, transparent, transparent 100px, black 300px)', WebkitMaskImage: 'linear-gradient(to right, transparent, transparent 100px, black 300px)' }}>
+      <div className="hidden lg:block absolute left-[400px] right-0 top-0 bottom-0 overflow-hidden z-20 pointer-events-none" style={{ maskImage: 'linear-gradient(to right, transparent, black 100px)', WebkitMaskImage: 'linear-gradient(to right, transparent, black 800px)' }}>
         <canvas ref={desktopCanvasRef} onMouseMove={handleMouseMove} onMouseLeave={() => lastMousePos.current = null} className={`w-full h-full opacity-0 animate-simple-fade delay-0 ${isInteractable ? 'pointer-events-auto' : 'pointer-events-none'}`} />
       </div>
-      <div className="lg:hidden absolute top-0 left-0 right-0 h-[45vh] overflow-hidden pointer-events-none z-0" style={{ maskImage: 'linear-gradient(to top, transparent, black 150px)', WebkitMaskImage: 'linear-gradient(to top, transparent, black 150px)' }}>
+      <div className="lg:hidden absolute top-0 left-0 right-0 h-[45vh] overflow-hidden pointer-events-none z-0" style={{ maskImage: 'linear-gradient(to top, transparent, black 100px)', WebkitMaskImage: 'linear-gradient(to top, transparent, black 100px)' }}>
         <canvas ref={mobileCanvasRef} className="w-full h-full opacity-20 animate-simple-fade delay-1" />
       </div>
     </>
