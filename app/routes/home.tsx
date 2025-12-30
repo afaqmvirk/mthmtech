@@ -71,7 +71,17 @@ export default function Home() {
         setIsSubmitting(false);
         return;
       }
+
+      // Send welcome email
+      const emailFormData = new FormData();
+      emailFormData.append("to", email);
       
+      // Fire and forget the email sending to not block UI
+      fetch("/api/send-email", {
+        method: "POST",
+        body: emailFormData,
+      });
+            
       setIsSubmitted(true);
       setEmail("");
     } catch (err) {

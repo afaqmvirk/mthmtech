@@ -1,11 +1,7 @@
 import { useState, useEffect } from "react";
 
-// Import SVG files directly
-import Squiggle1 from "../../squiggle1.svg?url";
-import Squiggle2 from "../../squiggle2.svg?url";
-import Squiggle3 from "../../squiggle3.svg?url";
-
-const squiggles = [Squiggle1, Squiggle2, Squiggle3];
+// Reference public assets directly
+const squiggles = ["/squiggle1.svg", "/squiggle2.svg", "/squiggle3.svg"];
 
 export function RandomSquiggle() {
   const [selectedIndex, setSelectedIndex] = useState<number | null>(null);
