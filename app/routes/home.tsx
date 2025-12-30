@@ -225,7 +225,7 @@ export default function Home() {
                   </button>
                 </form>
                 {error && (
-                  <p className="text-sm text-teal-400 font-sans italic ml-1">{error}</p>
+                  <p className="text-sm text-teal-400 font-serif italic ml-1">{error}</p>
                 )}
               </div>
             )}
@@ -244,7 +244,7 @@ export default function Home() {
 
       {/* Footer */}
       <footer className={`hidden md:block absolute bottom-4 left-0 right-0 text-center z-20 ${anim('delay-8', true)}`}>
-        <p className="text-sm text-slate-500">© 2026 MathemaTech</p>
+        <p className="text-sm text-slate-500 font-mono tracking-wider">© 2026 MathemaTech</p>
       </footer>
     </main>
   );

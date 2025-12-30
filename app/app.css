@@ -3,8 +3,7 @@
 /* CMU Serif font */
 @font-face {
   font-family: 'CMU Serif';
-  src: url('https://cdn.jsdelivr.net/gh/nicktehrany/cmu-serif-web-font@main/fonts/cmunrm.woff2') format('woff2'),
-       url('https://cdn.jsdelivr.net/gh/nicktehrany/cmu-serif-web-font@main/fonts/cmunrm.woff') format('woff');
+  src: url('/fonts/cmunrm.ttf') format('truetype');
   font-weight: 400;
   font-style: normal;
   font-display: swap;
@@ -12,8 +11,7 @@
 
 @font-face {
   font-family: 'CMU Serif';
-  src: url('https://cdn.jsdelivr.net/gh/nicktehrany/cmu-serif-web-font@main/fonts/cmunbx.woff2') format('woff2'),
-       url('https://cdn.jsdelivr.net/gh/nicktehrany/cmu-serif-web-font@main/fonts/cmunbx.woff') format('woff');
+  src: url('/fonts/cmunbx.ttf') format('truetype');
   font-weight: 700;
   font-style: normal;
   font-display: swap;
@@ -21,27 +19,60 @@
 
 @font-face {
   font-family: 'CMU Serif';
-  src: url('https://cdn.jsdelivr.net/gh/nicktehrany/cmu-serif-web-font@main/fonts/cmunti.woff2') format('woff2'),
-       url('https://cdn.jsdelivr.net/gh/nicktehrany/cmu-serif-web-font@main/fonts/cmunti.woff') format('woff');
+  src: url('/fonts/cmunti.ttf') format('truetype');
   font-weight: 400;
   font-style: italic;
   font-display: swap;
 }
+
 @font-face {
-  font-family: 'CMU Typewriter';
-  src: url('https://cdn.jsdelivr.net/gh/nicktehrany/cmu-serif-web-font@main/fonts/cmuntt.woff2') format('woff2');
+  font-family: 'CMU Serif';
+  src: url('/fonts/cmunbi.ttf') format('truetype');
+  font-weight: 700;
+  font-style: italic;
+  font-display: swap;
+}
+
+/* CMU Typewriter Text font */
+@font-face {
+  font-family: 'CMU Typewriter Text';
+  src: url('/fonts/cmuntt.ttf') format('truetype');
   font-weight: 400;
   font-style: normal;
   font-display: swap;
 }
 
+@font-face {
+  font-family: 'CMU Typewriter Text';
+  src: url('/fonts/cmuntb.ttf') format('truetype');
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'CMU Typewriter Text';
+  src: url('/fonts/cmunvi.ttf') format('truetype');
+  font-weight: 400;
+  font-style: italic;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'CMU Typewriter Text';
+  src: url('/fonts/cmuntx.ttf') format('truetype');
+  font-weight: 700;
+  font-style: italic;
+  font-display: swap;
+}
+
 @theme {
-  --font-serif: "CMU Serif", "Computer Modern", "Latin Modern Roman", Georgia, "Times New Roman", serif;
+  --font-serif: "CMU Serif", "Computer Modern", "Latin Modern Roman", Georgia, serif;
   --font-sans: "Inter", ui-sans-serif, system-ui, sans-serif,
     "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
   
   --font-space: "Space Grotesk", sans-serif;
-  --font-mono: "CMU Typewriter", monospace;
+  --font-mono: "CMU Typewriter Text", monospace;
   
   /* Custom color palette */
   --color-primary-50: #f0f7ff;
