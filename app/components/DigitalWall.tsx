@@ -205,13 +205,29 @@ export function DigitalWall() {
     }
   };
 
+  const [isVisible, setIsVisible] = useState(false);
+
+  useEffect(() => {
+    // Small delay to ensure the browser has registered the initial opacity-0 before fading in
+    const timer = setTimeout(() => setIsVisible(true), 100);
+    return () => clearTimeout(timer);
+  }, []);
+
   return (
     <>
       <div className="hidden lg:block absolute left-[400px] right-0 top-0 bottom-0 overflow-hidden z-20 pointer-events-none" style={{ maskImage: 'linear-gradient(to right, transparent, black 100px)', WebkitMaskImage: 'linear-gradient(to right, transparent, black 800px)' }}>
-        <canvas ref={desktopCanvasRef} onMouseMove={handleMouseMove} onMouseLeave={() => lastMousePos.current = null} className={`w-full h-full opacity-0 animate-simple-fade delay-0 ${isInteractable ? 'pointer-events-auto' : 'pointer-events-none'}`} />
+        <canvas 
+          ref={desktopCanvasRef} 
+          onMouseMove={handleMouseMove} 
+          onMouseLeave={() => lastMousePos.current = null} 
+          className={`w-full h-full transition-opacity duration-3000 ${isVisible ? 'opacity-100' : 'opacity-0'} ${isInteractable ? 'pointer-events-auto' : 'pointer-events-none'}`} 
+        />
       </div>
       <div className="lg:hidden absolute top-0 left-0 right-0 h-[45vh] overflow-hidden pointer-events-none z-0" style={{ maskImage: 'linear-gradient(to top, transparent, black 100px)', WebkitMaskImage: 'linear-gradient(to top, transparent, black 100px)' }}>
-        <canvas ref={mobileCanvasRef} className="w-full h-full opacity-20 animate-simple-fade delay-1" />
+        <canvas 
+          ref={mobileCanvasRef} 
+          className={`w-full h-full transition-opacity duration-3000 ${isVisible ? 'opacity-20' : 'opacity-0'}`} 
+        />
       </div>
     </>
   );

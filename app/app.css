@@ -175,6 +175,15 @@ body {
   animation: blob-float-5 38s ease-in-out infinite;
 }
 
+/* Make blobs significantly larger on mobile to maintain prominence */
+@media (max-width: 768px) {
+  .blob-1 { width: 150vw; height: 150vw; top: -30%; left: -50%; }
+  .blob-2 { width: 140vw; height: 140vw; top: 10%; right: -60%; }
+  .blob-3 { width: 130vw; height: 130vw; bottom: -20%; left: -10%; }
+  .blob-4 { width: 120vw; height: 120vw; top: 30%; left: -20%; }
+  .blob-5 { width: 110vw; height: 110vw; top: -10%; right: -20%; }
+}
+
 @keyframes blob-float-1 {
   0%, 100% { transform: translate(0, 0) scale(1) rotate(0deg); }
   33% { transform: translate(8%, 12%) scale(1.08) rotate(5deg); }

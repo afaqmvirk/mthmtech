@@ -95,7 +95,7 @@ export default function Home() {
       </header>
 
       <div className="flex-1 flex items-center">
-      <div className="blob-container">
+      <div className={`blob-container transition-opacity duration-3000 ${isReady ? 'opacity-100' : 'opacity-0'}`}>
         <div className="blob blob-1"></div>
         <div className="blob blob-2"></div>
         <div className="blob blob-3"></div>
