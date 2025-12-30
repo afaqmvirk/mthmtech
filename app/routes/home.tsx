@@ -90,8 +90,8 @@ export default function Home() {
   return (
     <main className="gradient-bg min-h-screen flex flex-col px-6 py-12">
       {/* Logo in top right */}
-      <header className={`absolute top-6 right-6 z-20 ${anim('delay-1', true)}`}>
-        <img src="/mathematechwhite.png" alt="MathemaTech" className="h-8 w-auto opacity-80" />
+      <header className={`absolute top-6 right-6 z-20 transition-opacity duration-1000 ${isReady ? 'opacity-80' : 'opacity-0'}`}>
+        <img src="/mathematechwhite.png" alt="MathemaTech" className="h-8 w-auto" />
       </header>
 
       <div className="flex-1 flex items-center">
@@ -103,8 +103,7 @@ export default function Home() {
         <div className="blob blob-5"></div>
       </div>
 
-      {/* Noise overlay for dithering blobs */}
-      <div className="noise-overlay" />
+      {/* Noise overlay removed from here - keeping the one below for better layering */}
 
       <div className="perspective-grid">
         <div className="perspective-grid-inner" />
@@ -243,7 +242,7 @@ export default function Home() {
       </div>
 
       {/* Footer */}
-      <footer className={`hidden md:block absolute bottom-4 left-0 right-0 text-center z-20 ${anim('delay-8', true)}`}>
+      <footer className={`hidden md:block absolute bottom-4 left-0 right-0 text-center z-20 transition-opacity duration-1000 ${isReady ? 'opacity-100' : 'opacity-0'}`}>
         <p className="text-sm text-slate-500 font-mono tracking-wider">© 2026 MathemaTech</p>
       </footer>
     </main>
