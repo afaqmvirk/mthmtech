@@ -48,15 +48,6 @@ export const WelcomeEmail = ({ username = "there" }: WelcomeEmailProps) => {
       </Head>
       <Preview>Welcome to MathemaTech</Preview>
       <Body style={main}>
-        <Section style={squiggleWrapper}>
-           <Img 
-            src={`${baseUrl}/squiggle1.svg`} 
-            width="600"
-            alt=""
-            style={squiggleImage}
-           />
-        </Section>
-
         <Container style={container}>
           {/* Logo */}
           <Section style={headerSection}>
@@ -109,6 +100,15 @@ export const WelcomeEmail = ({ username = "there" }: WelcomeEmailProps) => {
             </Link>
           </Text>
         </Container>
+
+        <Section style={squiggleWrapper}>
+           <Img 
+            src={`${baseUrl}/squiggle_cut.svg`} 
+            width="600"
+            alt=""
+            style={squiggleImage}
+           />
+        </Section>
       </Body>
     </Html>
   );
@@ -125,22 +125,16 @@ const main = {
 
 const squiggleWrapper = {
   width: "100%",
-  height: "100px", // Defined height to cut it off
+  height: "150px", // Fixed height to cut it off
   overflow: "hidden",
-  marginBottom: "20px",
+  marginTop: "40px",
 };
 
 const squiggleImage = {
   width: "100%",
-  maxWidth: "600px", // Limit max width
+  maxWidth: "600px",
   margin: "0 auto",
   display: "block",
-  transform: "translateY(-50%)", // Pull it up to cut off top half? or push down?
-  // User said "add the squiggle svg at the top, half cut off".
-  // Usually this means we see the bottom half, or it's peeking in.
-  // I'll try normal flow but constrained height.
-  // Actually, if I want it cut off, 'overflow: hidden' on wrapper handles it.
-  // I will just let it scale.
   objectFit: "cover" as const,
   opacity: "0.5",
 };
@@ -188,7 +182,7 @@ const h1 = {
 };
 
 const text = {
-  color: "#334155", // Slate 700 - readable on white
+  color: "#334155", // Dark slate for white background
   fontSize: "16px",
   lineHeight: "26px",
 };
