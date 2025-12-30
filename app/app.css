@@ -1,0 +1,429 @@
+@import "tailwindcss";
+
+/* CMU Serif font */
+@font-face {
+  font-family: 'CMU Serif';
+  src: url('https://cdn.jsdelivr.net/gh/nicktehrany/cmu-serif-web-font@main/fonts/cmunrm.woff2') format('woff2'),
+       url('https://cdn.jsdelivr.net/gh/nicktehrany/cmu-serif-web-font@main/fonts/cmunrm.woff') format('woff');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'CMU Serif';
+  src: url('https://cdn.jsdelivr.net/gh/nicktehrany/cmu-serif-web-font@main/fonts/cmunbx.woff2') format('woff2'),
+       url('https://cdn.jsdelivr.net/gh/nicktehrany/cmu-serif-web-font@main/fonts/cmunbx.woff') format('woff');
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'CMU Serif';
+  src: url('https://cdn.jsdelivr.net/gh/nicktehrany/cmu-serif-web-font@main/fonts/cmunti.woff2') format('woff2'),
+       url('https://cdn.jsdelivr.net/gh/nicktehrany/cmu-serif-web-font@main/fonts/cmunti.woff') format('woff');
+  font-weight: 400;
+  font-style: italic;
+  font-display: swap;
+}
+@font-face {
+  font-family: 'CMU Typewriter';
+  src: url('https://cdn.jsdelivr.net/gh/nicktehrany/cmu-serif-web-font@main/fonts/cmuntt.woff2') format('woff2');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+@theme {
+  --font-serif: "CMU Serif", "Computer Modern", "Latin Modern Roman", Georgia, "Times New Roman", serif;
+  --font-sans: "Inter", ui-sans-serif, system-ui, sans-serif,
+    "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+  
+  --font-space: "Space Grotesk", sans-serif;
+  --font-mono: "CMU Typewriter", monospace;
+  
+  /* Custom color palette */
+  --color-primary-50: #f0f7ff;
+  --color-primary-100: #e0efff;
+  --color-primary-200: #b9dfff;
+  --color-primary-300: #7cc6ff;
+  --color-primary-400: #36a9ff;
+  --color-primary-500: #0c8dff;
+  --color-primary-600: #006eff;
+  --color-primary-700: #0058d4;
+  --color-primary-800: #0649a6;
+  --color-primary-900: #0c3e83;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+html,
+body {
+  @apply bg-slate-950 text-slate-100;
+  min-height: 100vh;
+}
+
+/* Animated gradient background - Granim powered */
+/* Gradient background base */
+.gradient-bg {
+  background: #041418;
+  position: relative;
+  overflow: hidden;
+}
+
+/* Blob gradient container */
+.blob-container {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  overflow: hidden;
+  filter: blur(80px);
+}
+
+/* Blob base styles */
+.blob {
+  position: absolute;
+  border-radius: 40% 60% 55% 45% / 55% 45% 50% 50%;
+  mix-blend-mode: screen;
+  will-change: transform;
+}
+
+/* Blob 1 - top left */
+.blob-1 {
+  width: 90vw;
+  height: 80vw;
+  top: -45%;
+  left: -35%;
+  background: radial-gradient(ellipse, rgba(8, 68, 72, 0.35) 0%, rgba(5, 46, 48, 0.15) 50%, transparent 70%);
+  animation: blob-float-1 40s ease-in-out infinite;
+}
+
+/* Blob 2 - right side */
+.blob-2 {
+  width: 75vw;
+  height: 85vw;
+  top: 15%;
+  right: -40%;
+  background: radial-gradient(ellipse, rgba(6, 61, 64, 0.3) 0%, rgba(4, 20, 24, 0.12) 50%, transparent 70%);
+  animation: blob-float-2 45s ease-in-out infinite;
+}
+
+/* Blob 3 - bottom center */
+.blob-3 {
+  width: 70vw;
+  height: 55vw;
+  bottom: -35%;
+  left: 15%;
+  background: radial-gradient(ellipse, rgba(10, 85, 88, 0.25) 0%, rgba(6, 61, 64, 0.1) 50%, transparent 70%);
+  animation: blob-float-3 35s ease-in-out infinite;
+}
+
+/* Blob 4 - center */
+.blob-4 {
+  width: 55vw;
+  height: 65vw;
+  top: 25%;
+  left: 5%;
+  background: radial-gradient(ellipse, rgba(12, 95, 100, 0.2) 0%, rgba(8, 68, 72, 0.08) 50%, transparent 70%);
+  animation: blob-float-4 50s ease-in-out infinite;
+}
+
+/* Blob 5 - top right area */
+.blob-5 {
+  width: 50vw;
+  height: 60vw;
+  top: -25%;
+  right: 5%;
+  background: radial-gradient(ellipse, rgba(6, 61, 64, 0.2) 0%, rgba(4, 20, 24, 0.08) 50%, transparent 70%);
+  animation: blob-float-5 38s ease-in-out infinite;
+}
+
+@keyframes blob-float-1 {
+  0%, 100% { transform: translate(0, 0) scale(1) rotate(0deg); }
+  33% { transform: translate(8%, 12%) scale(1.08) rotate(5deg); }
+  66% { transform: translate(-5%, 8%) scale(0.92) rotate(-3deg); }
+}
+
+@keyframes blob-float-2 {
+  0%, 100% { transform: translate(0, 0) scale(1) rotate(0deg); }
+  33% { transform: translate(-12%, -8%) scale(0.9) rotate(-5deg); }
+  66% { transform: translate(8%, -12%) scale(1.12) rotate(4deg); }
+}
+
+@keyframes blob-float-3 {
+  0%, 100% { transform: translate(0, 0) scale(1) rotate(0deg); }
+  50% { transform: translate(15%, -15%) scale(1.18) rotate(6deg); }
+}
+
+@keyframes blob-float-4 {
+  0%, 100% { transform: translate(0, 0) scale(1) rotate(0deg); }
+  25% { transform: translate(-8%, 10%) scale(1.1) rotate(-4deg); }
+  75% { transform: translate(12%, -6%) scale(0.88) rotate(5deg); }
+}
+
+@keyframes blob-float-5 {
+  0%, 100% { transform: translate(0, 0) scale(1) rotate(0deg); }
+  40% { transform: translate(10%, 10%) scale(1.15) rotate(4deg); }
+  80% { transform: translate(-6%, -8%) scale(0.9) rotate(-2deg); }
+}
+
+/* Noise overlay for texture - reduces gradient banding */
+.noise-overlay {
+  position: absolute;
+  inset: 0;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 1024 1024' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.5' numOctaves='6' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
+  opacity: 0.18;
+  pointer-events: none;
+  z-index: 2;
+  mix-blend-mode: soft-light;
+}
+
+/* Perspective grid */
+.perspective-grid {
+  position: absolute;
+  inset: 0;
+  perspective: 1000px;
+  overflow: hidden;
+  z-index: 4;
+  pointer-events: none;
+}
+
+.perspective-grid-inner {
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%) rotateX(65deg);
+  transform-origin: center bottom;
+  width: 200%;
+  height: 150%;
+  background-image: 
+    linear-gradient(to right, rgba(20, 184, 166, 0.05) 1px, transparent 1px),
+    linear-gradient(to top, rgba(20, 184, 166, 0.05) 1px, transparent 1px);
+  background-size: 80px 80px;
+  animation: grid-scroll 20s linear infinite;
+  mask-image: 
+    linear-gradient(to bottom, transparent 0%, rgba(0,0,0,0.15) 50%, rgba(0,0,0,0.4) 80%, rgba(0,0,0,0.6) 100%),
+    linear-gradient(to right, transparent 0%, rgba(0,0,0,1) 15%, rgba(0,0,0,1) 85%, transparent 100%);
+  mask-composite: intersect;
+  -webkit-mask-image: 
+    linear-gradient(to bottom, transparent 0%, rgba(0,0,0,0.15) 50%, rgba(0,0,0,0.4) 80%, rgba(0,0,0,0.6) 100%),
+    linear-gradient(to right, transparent 0%, rgba(0,0,0,1) 15%, rgba(0,0,0,1) 85%, transparent 100%);
+  -webkit-mask-composite: source-in;
+}
+
+@keyframes grid-scroll {
+  0% { background-position: 0 0; }
+  100% { background-position: 0 80px; }
+}
+
+/* Decorative Squiggle */
+.squiggle-container {
+  position: absolute;
+  z-index: 2;
+  pointer-events: none;
+  opacity: 1.0;
+  overflow: hidden;
+  
+  /* Mobile: bottom position, horizontally centered, half cut off at bottom */
+  left: 50%;
+  bottom: 0;
+  top: auto;
+  transform: translateX(-50%) translateY(50%);
+  width: 160vw;
+  height: auto;
+  opacity: 0;
+  animation: simple-fade-in 3s ease-out forwards;
+  animation-delay: 0s;
+}
+
+.squiggle-svg {
+  width: 100%;
+  height: auto;
+}
+
+/* Desktop: left side, vertically centered, half cut off from left */
+@media (min-width: 768px) {
+  .squiggle-container {
+    left: 0;
+    top: 50%;
+    bottom: auto;
+    transform: translateX(-50%) translateY(-50%);
+    width: auto;
+    height: 95vh;
+  }
+  
+  .squiggle-svg {
+    width: auto;
+    height: 100%;
+  }
+}
+
+/* Animated Scribble SVG */
+.animated-scribble-container {
+  position: absolute;
+  inset: 0;
+  z-index: 3;
+  pointer-events: none;
+  overflow: hidden;
+}
+
+.animated-scribble {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  opacity: 0.4;
+}
+
+.animated-scribble path {
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+@keyframes drawPath {
+  to {
+    stroke-dashoffset: 0;
+  }
+}
+
+@keyframes floatPath {
+  0%, 100% {
+    transform: translate(0, 0) scale(1);
+    opacity: var(--path-opacity, 0.6);
+  }
+  25% {
+    transform: translate(1%, -0.5%) scale(1.01);
+    opacity: calc(var(--path-opacity, 0.6) * 0.9);
+  }
+  50% {
+    transform: translate(-0.5%, 1%) scale(0.99);
+    opacity: var(--path-opacity, 0.6);
+  }
+  75% {
+    transform: translate(0.5%, 0.5%) scale(1.005);
+    opacity: calc(var(--path-opacity, 0.6) * 1.1);
+  }
+}
+
+/* Subtle glow effect */
+.glow-text {
+  text-shadow: 0 0 40px rgba(99, 102, 241, 0.3);
+}
+
+/* Button hover animation */
+.btn-glow {
+  position: relative;
+  overflow: hidden;
+  transition: all 0.3s ease;
+}
+
+.btn-glow::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(255, 255, 255, 0.1),
+    transparent
+  );
+  transition: left 0.5s ease;
+}
+
+.btn-glow:hover::before {
+  left: 100%;
+}
+
+.btn-glow:hover {
+  box-shadow: 
+    0 0 30px rgba(99, 102, 241, 0.4),
+    0 0 60px rgba(99, 102, 241, 0.2);
+  transform: translateY(-2px);
+}
+
+/* Fade-in animation for content */
+@keyframes fade-up {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes simple-fade-in {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+.animate-fade-up {
+  animation: fade-up 2.5s cubic-bezier(0.2, 0, 0.2, 1) forwards;
+}
+
+.animate-simple-fade {
+  animation: simple-fade-in 3s ease-out forwards;
+}
+
+.delay-0 { animation-delay: 0s; }
+.delay-1 { animation-delay: 1s; }
+.delay-2 { animation-delay: 2s; }
+.delay-3 { animation-delay: 5s; }
+.delay-4 { animation-delay: 7s; }
+.delay-5 { animation-delay: 7.5s; }
+.delay-6 { animation-delay: 9.5s; }
+.delay-7 { animation-delay: 11s; }
+.delay-8 { animation-delay: 12.5s; }
+.delay-9 { animation-delay: 14s; }
+
+
+
+/* Input focus animation */
+.input-glow:focus {
+  box-shadow: 
+    0 0 0 2px rgba(99, 102, 241, 0.3),
+    0 0 20px rgba(99, 102, 241, 0.2);
+}
+
+/* Subtle floating animation */
+@keyframes float {
+  0%, 100% {
+    transform: translateY(0px);
+  }
+  50% {
+    transform: translateY(-10px);
+  }
+}
+
+.animate-float {
+  animation: float 6s ease-in-out infinite;
+}
+.gradient-input-wrapper {
+  position: relative;
+  display: flex;
+  flex: 1;
+}
+
+.gradient-input-wrapper::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  padding: 1.5px;
+  border-radius: 6px;
+  background: linear-gradient(to right, rgba(20, 184, 166, 0.8), rgba(20, 184, 166, 0.3) 40%, transparent);
+  -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+  mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+  -webkit-mask-composite: xor;
+  mask-composite: exclude;
+  pointer-events: none;
+}
