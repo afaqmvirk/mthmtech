@@ -115,7 +115,7 @@ export default function Home() {
       {isReady && <RandomSquiggle />}
       {isReady && <DigitalWall />}
 
-      <div className={`relative z-10 max-w-3xl w-full px-6 mx-auto md:mx-0 md:ml-[15rem] lg:ml-[20rem] xl:ml-[24rem] font-serif transition-opacity duration-300 ${isReady ? 'opacity-100' : 'opacity-0'}`}>
+      <div className={`relative z-30 max-w-3xl w-full px-6 mx-auto md:mx-0 md:ml-[15rem] lg:ml-[20rem] xl:ml-[24rem] font-serif transition-opacity duration-300 ${isReady ? 'opacity-100' : 'opacity-0'} pointer-events-none`}>
         <div className="space-y-4 md:space-y-6">
           <p 
             className={`text-lg md:text-xl xl:text-2xl xl:leading-relaxed leading-normal text-slate-300 opacity-0 ${anim('delay-2')}`}
@@ -155,7 +155,7 @@ export default function Home() {
             style={{ animationFillMode: 'forwards' }}
           >
             {isSubmitted ? (
-              <div className="flex items-center gap-3 text-emerald-400">
+              <div className="flex items-center gap-3 text-emerald-400 pointer-events-auto">
                 <svg 
                   className="w-6 h-6" 
                   fill="none" 
@@ -172,7 +172,7 @@ export default function Home() {
                 <span className="text-lg">You're on the list. We'll be in touch.</span>
               </div>
             ) : (
-              <div className="space-y-2">
+              <div className="space-y-2 pointer-events-auto">
                 <form onSubmit={handleSubmit} className="flex flex-row gap-2 sm:gap-3">
                   <div className="gradient-input-wrapper">
                     <input

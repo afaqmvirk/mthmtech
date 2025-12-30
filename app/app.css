@@ -94,7 +94,9 @@ html {
 html,
 body {
   @apply bg-slate-950 text-slate-100;
-  min-height: 100vh;
+  height: 100dvh; /* Use dynamic viewport height to prevent address bar jumps */
+  overflow: hidden; /* Prevent body scrolling entirely */
+  overscroll-behavior: none; /* unexpected bounce effects */
 }
 
 /* Animated gradient background - Granim powered */
@@ -111,7 +113,8 @@ body {
   inset: 0;
   z-index: 1;
   overflow: hidden;
-  filter: blur(80px);
+  /* Removed expensive blur filter for performance */
+  /* filter: blur(80px); */
 }
 
 /* Blob base styles */
@@ -399,23 +402,23 @@ body {
 }
 
 .animate-fade-up {
-  animation: fade-up 2.5s cubic-bezier(0.2, 0, 0.2, 1) forwards;
+  animation: fade-up 1.2s cubic-bezier(0.2, 0, 0.2, 1) forwards;
 }
 
 .animate-simple-fade {
-  animation: simple-fade-in 3s ease-out forwards;
+  animation: simple-fade-in 1.5s ease-out forwards;
 }
 
 .delay-0 { animation-delay: 0s; }
-.delay-1 { animation-delay: 1s; }
-.delay-2 { animation-delay: 2s; }
-.delay-3 { animation-delay: 5s; }
-.delay-4 { animation-delay: 7s; }
-.delay-5 { animation-delay: 7.5s; }
-.delay-6 { animation-delay: 9.5s; }
-.delay-7 { animation-delay: 11s; }
-.delay-8 { animation-delay: 12.5s; }
-.delay-9 { animation-delay: 14s; }
+.delay-1 { animation-delay: 0.2s; }  /* Header */
+.delay-2 { animation-delay: 0.8s; }  /* Intro P */
+.delay-3 { animation-delay: 2.2s; }  /* Statement 1 */
+.delay-4 { animation-delay: 3.4s; }  /* Statement 2 */
+.delay-5 { animation-delay: 3.8s; }  /* Divider */
+.delay-6 { animation-delay: 5.0s; }  /* Closing */
+.delay-7 { animation-delay: 5.5s; }  /* Form */
+.delay-8 { animation-delay: 6.5s; }  /* Footer */
+.delay-9 { animation-delay: 7.0s; }
 
 
 

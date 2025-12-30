@@ -62,16 +62,25 @@ export function DigitalWall() {
   useEffect(() => {
     updateDimensions();
     window.addEventListener('resize', updateDimensions);
-    const it = setTimeout(() => setIsInteractable(true), 14000);
+    const it = setTimeout(() => setIsInteractable(true), 8000);
     return () => {
       window.removeEventListener('resize', updateDimensions);
       clearTimeout(it);
     };
   }, [updateDimensions]);
 
+  // Main animation loop
   useEffect(() => {
     let rafId: number;
+    let frameCount = 0;
+
     const render = () => {
+      // Optimization: If not interactable, render a few frames to settle, then stop.
+      // This ensures the wall is visible but uses 0 CPU during the heavy text intro animations.
+      if (!isInteractable && frameCount > 5) {
+        return; 
+      }
+
       const now = Date.now();
       const dpr = window.devicePixelRatio || 1;
 
@@ -88,12 +97,15 @@ export function DigitalWall() {
         const { cols, rows, charW, charH } = dim.current;
         if (cols === 0) return;
 
+        // Only clear and redraw if we have active cells OR if it's the initial static render
+        // But since we want to stop the loop when idle, we just draw every frame we represent.
+        
         ctx.clearRect(0, 0, canvas.width, canvas.height);
         ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
         ctx.font = `bold ${fontSize}px "CMU Typewriter Text", monospace`;
         ctx.textAlign = 'center';
         
-        let lastColor = ''; // Reset state per canvas frame
+        let lastColor = '';
 
         for (let y = 0; y < rows; y++) {
           for (let x = 0; x < cols; x++) {
@@ -104,22 +116,19 @@ export function DigitalWall() {
             let color = 'rgba(20, 184, 166, 0.08)';
             if (cell.status !== 'idle') {
               const elapsed = now - cell.triggerTime;
-              const holdTime = 2000; // Persist at full brightness
-              const fadeTime = 100; // Duration of the fade after hold
+              const holdTime = 2000;
+              const fadeTime = 500;
               const totalTime = holdTime + fadeTime;
               
               if (elapsed < totalTime) {
-                // p stays 1.0 during hold, then drops to 0.0 during fade
                 const p = elapsed < holdTime ? 1 : 1 - ((elapsed - holdTime) / fadeTime);
                 
-                // Color logic
                 if (cell.status === 'primary') {
-                  color = `rgba(45, 212, 191, ${0.15 + p * 0.85})`; // Brighter teal-400
+                  color = `rgba(45, 212, 191, ${0.15 + p * 0.85})`;
                 } else {
-                  color = `rgba(13, 148, 136, ${0.1 + p * 0.5})`; // Standard teal-600
+                  color = `rgba(13, 148, 136, ${0.1 + p * 0.5})`;
                 }
 
-                // Bit Persistence: Switch back to random character ONCE after holdTime
                 if (!cell.hasSwitchedBack && elapsed > holdTime) {
                   cell.char = CHARS[Math.floor(Math.random() * CHARS.length)];
                   cell.hasSwitchedBack = true;
@@ -129,7 +138,7 @@ export function DigitalWall() {
                 cell.char = CHARS[Math.floor(Math.random() * CHARS.length)];
               }
             }
-            // Performance optimization: minimize canvas state changes
+            
             if (color !== lastColor) {
               ctx.fillStyle = color;
               lastColor = color;
@@ -139,12 +148,13 @@ export function DigitalWall() {
         }
       });
 
+      frameCount++;
       rafId = requestAnimationFrame(render);
     };
 
     render();
     return () => cancelAnimationFrame(rafId);
-  }, []);
+  }, [isInteractable]);
 
   const handleMouseMove = (e: React.MouseEvent) => {
     if (!isInteractable) return;
@@ -195,7 +205,7 @@ export function DigitalWall() {
 
   return (
     <>
-      <div className="hidden lg:block absolute left-[800px] right-0 top-0 bottom-0 overflow-hidden z-20 pointer-events-none" style={{ maskImage: 'linear-gradient(to right, transparent, black 400px)', WebkitMaskImage: 'linear-gradient(to right, transparent, black 400px)' }}>
+      <div className="hidden lg:block absolute left-[600px] right-0 top-0 bottom-0 overflow-hidden z-20 pointer-events-none" style={{ maskImage: 'linear-gradient(to right, transparent, transparent 100px, black 300px)', WebkitMaskImage: 'linear-gradient(to right, transparent, transparent 100px, black 300px)' }}>
         <canvas ref={desktopCanvasRef} onMouseMove={handleMouseMove} onMouseLeave={() => lastMousePos.current = null} className={`w-full h-full opacity-0 animate-simple-fade delay-2 ${isInteractable ? 'pointer-events-auto' : 'pointer-events-none'}`} />
       </div>
       <div className="lg:hidden absolute top-0 left-0 right-0 h-[45vh] overflow-hidden pointer-events-none z-0" style={{ maskImage: 'linear-gradient(to top, transparent, black 150px)', WebkitMaskImage: 'linear-gradient(to top, transparent, black 150px)' }}>
