@@ -63,7 +63,7 @@ export const WelcomeEmail = ({ username = "there" }: WelcomeEmailProps) => {
           </Section>
 
           <Section style={contentSection}>
-            <Heading style={h1}>Welcome, {username}.</Heading>
+            <Heading style={h1}>Welcome 🎉</Heading>
             <Text style={text}>
               Thanks for signing up! You'll hear more news shortly.
             </Text>
