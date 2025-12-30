@@ -113,6 +113,7 @@ body {
   inset: 0;
   z-index: 1;
   overflow: hidden;
+  pointer-events: none; /* Ensure blobs don't block interaction */
   /* Removed expensive blur filter for performance */
   /* filter: blur(80px); */
 }

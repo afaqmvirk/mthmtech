@@ -158,19 +158,19 @@ export function DigitalWall() {
     return () => cancelAnimationFrame(rafId);
   }, [isInteractable, dimensionsKey]);
 
-  const handleMouseMove = (e: React.MouseEvent) => {
+  const handleInteraction = (clientX: number, clientY: number, canvasRef: React.RefObject<HTMLCanvasElement | null>, dim: typeof desktopDim, grid: typeof desktopGrid) => {
     if (!isInteractable) return;
-    const { charW, charH, cols, rows } = desktopDim.current;
-    const rect = desktopCanvasRef.current?.getBoundingClientRect();
+    const { charW, charH, cols, rows } = dim.current;
+    const rect = canvasRef.current?.getBoundingClientRect();
     if (!rect) return;
 
-    const x2 = Math.floor((e.clientX - rect.left) / charW);
-    const y2 = Math.floor((e.clientY - rect.top) / charH);
+    const x2 = Math.floor((clientX - rect.left) / charW);
+    const y2 = Math.floor((clientY - rect.top) / charH);
     const now = Date.now();
 
     const trigger = (tx: number, ty: number, st: 'primary' | 'secondary') => {
       if (tx >= 0 && tx < cols && ty >= 0 && ty < rows) {
-        const c = desktopGrid.current[ty * cols + tx];
+        const c = grid.current[ty * cols + tx];
         if (c) { 
           c.status = st; 
           c.triggerTime = now; 
@@ -218,15 +218,21 @@ export function DigitalWall() {
       <div className="hidden lg:block absolute left-[400px] right-0 top-0 bottom-0 overflow-hidden z-20 pointer-events-none" style={{ maskImage: 'linear-gradient(to right, transparent, black 100px)', WebkitMaskImage: 'linear-gradient(to right, transparent, black 800px)' }}>
         <canvas 
           ref={desktopCanvasRef} 
-          onMouseMove={handleMouseMove} 
+          onMouseMove={(e) => handleInteraction(e.clientX, e.clientY, desktopCanvasRef, desktopDim, desktopGrid)} 
           onMouseLeave={() => lastMousePos.current = null} 
           className={`w-full h-full transition-opacity duration-3000 ${isVisible ? 'opacity-100' : 'opacity-0'} ${isInteractable ? 'pointer-events-auto' : 'pointer-events-none'}`} 
         />
       </div>
-      <div className="lg:hidden absolute top-0 left-0 right-0 h-[45vh] overflow-hidden pointer-events-none z-0" style={{ maskImage: 'linear-gradient(to top, transparent, black 100px)', WebkitMaskImage: 'linear-gradient(to top, transparent, black 100px)' }}>
+      <div className={`lg:hidden absolute top-0 left-0 right-0 h-[45vh] overflow-hidden z-20 ${isInteractable ? 'pointer-events-auto' : 'pointer-events-none'}`} style={{ maskImage: 'linear-gradient(to top, transparent, black 100px)', WebkitMaskImage: 'linear-gradient(to top, transparent, black 100px)' }}>
         <canvas 
           ref={mobileCanvasRef} 
-          className={`w-full h-full transition-opacity duration-3000 ${isVisible ? 'opacity-20' : 'opacity-0'}`} 
+          onMouseMove={(e) => handleInteraction(e.clientX, e.clientY, mobileCanvasRef, mobileDim, mobileGrid)}
+          onTouchStart={(e) => handleInteraction(e.touches[0].clientX, e.touches[0].clientY, mobileCanvasRef, mobileDim, mobileGrid)}
+          onTouchMove={(e) => handleInteraction(e.touches[0].clientX, e.touches[0].clientY, mobileCanvasRef, mobileDim, mobileGrid)}
+          onMouseLeave={() => lastMousePos.current = null}
+          onTouchEnd={() => lastMousePos.current = null}
+          className={`w-full h-full transition-opacity duration-3000 ${isVisible ? 'opacity-40' : 'opacity-0'}`} 
+          style={{ touchAction: 'none' }}
         />
       </div>
     </>
