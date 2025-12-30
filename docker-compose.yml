@@ -1,11 +1,11 @@
 version: "3.9"
-
 services:
   app:
     build: .
     container_name: mthm_app
     restart: unless-stopped
     ports:
-      - "3001:3000" # Map internal 3000 to host 3001
+      - "3001:3000"
+    env_file: .env
     environment:
       - NODE_ENV=production
