@@ -94,7 +94,7 @@ export default function Home() {
         <img src="/mathematechwhite.png" alt="MathemaTech" className="h-8 w-auto" />
       </header>
 
-      <div className="flex-1 flex items-center">
+      <div className="flex-1 flex items-start pt-[20vh] md:items-center md:pt-0">
       <div className={`blob-container transition-opacity duration-3000 ${isReady ? 'opacity-100' : 'opacity-0'}`}>
         <div className="blob blob-1"></div>
         <div className="blob blob-2"></div>
